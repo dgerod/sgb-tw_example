@@ -1,0 +1,37 @@
+The SGB-TW tool is composed by three main components:
+
+* The sgb-cli command line, that is a python script.
+* The customized TiddlyWiki (TW) that is used as GUI.
+* The DB where tiddlers and the TW of the user are stored.
+
+And these three components interact between them as shown in the the below figure.
+
+[[plantuml[
+@startuml
+
+package SGB-TW {
+   [sgb-cli]
+   [TiddlyWiki] as TW
+}
+
+package "User Project" as user {
+   database DB
+}
+
+[sgb-cli] -> [DB]
+[sgb-cli] -> [TW]
+
+note bottom of [DB]
+load_tiddlers()
+save_tiddlers()
+end note
+
+note bottom of [TW]
+extract_tiddlers()
+add_tiddlers()
+end note
+
+
+@enduml
+]]]
+
